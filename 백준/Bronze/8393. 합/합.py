@@ -1,9 +1,4 @@
-# 시간 복잡도 : O(n)
+# 시간 복잡도 : O(1)
+n = int(input())
 
-num = int(input())
-sum = 0
-
-for i in range(1, num+1):
-    sum += i
-    
-print(sum)    
+print(n * (n + 1) // 2)
