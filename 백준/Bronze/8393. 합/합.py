@@ -1,3 +1,5 @@
+# 시간 복잡도 : O(n)
+
 num = int(input())
 sum = 0
 
