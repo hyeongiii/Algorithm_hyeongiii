@@ -1,12 +1,16 @@
 import sys
 
-num = int(sys.stdin.readline().rstrip())
+num = int(sys.stdin.readline())
+st = 0
 
-for x in range(num+1):
-    nums = list(map(int, str(x)))
-    sum_ = x + sum(nums)
-    if sum_ == num:
-        print(x)
+if num > 99:
+    st = num - len(str(num)) * 9
+
+N = 0
+for i in range(st, num):
+    li = list(map(int, str(i)))
+    result = i + sum(li)
+    if(num == result):
+        N = i
         break
-    if num == x:
-        print(0)
+print(N)        
