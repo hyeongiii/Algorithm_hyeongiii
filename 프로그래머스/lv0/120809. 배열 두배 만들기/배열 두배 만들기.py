@@ -1,0 +1,3 @@
+def solution(numbers):
+    answer = [2*x for x in numbers]
+    return answer
