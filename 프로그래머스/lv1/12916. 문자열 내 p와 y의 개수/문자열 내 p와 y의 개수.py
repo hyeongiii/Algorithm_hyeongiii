@@ -1,15 +1,16 @@
-def solution(s):
+def solution(word):
     answer = True
-    pc = 0
-    yc = 0
-    word = s.upper()
+    cnt_p = 0
+    cnt_y = 0
+    word = word.lower()
+    
     for i in word:
-        if i == "P":
-            pc += 1
-        elif i == "Y":
-            yc += 1
+        if i == "p":
+            cnt_p += 1
+        elif i == "y":
+            cnt_y += 1
     
-    if pc != yc:
+    if cnt_p != cnt_y:
         answer = False
-    
+
     return answer
