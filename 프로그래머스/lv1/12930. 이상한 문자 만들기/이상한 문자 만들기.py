@@ -1,12 +1,13 @@
 def solution(s):
-    answer = []
-    words = s.split(" ")
-    for word in words:
-        w = ""
-        for i in range(len(word)):
-            if i % 2:
-                w += word[i].lower()
+    li = s.split(" ")
+    answer = ""
+
+    for i in li:
+        for j in range(len(i)):
+            if j % 2 == 0:
+                answer += i[j].upper()
             else:
-                w += word[i].upper()
-        answer.append(w)
-    return ' '.join(answer)
+                answer += i[j].lower()
+        answer += " "
+        
+    return answer[:-1]
