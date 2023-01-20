@@ -1,8 +1,9 @@
 def solution(s):
-    answer = True
+    num = "0123456789"
     if len(s) != 4 and len(s) != 6:
-        answer = False
+        return False
     else:
-        if not s.isdecimal():
-            answer = False
-    return answer
+        for i in s:
+            if not i in num:
+                return False
+        return True
