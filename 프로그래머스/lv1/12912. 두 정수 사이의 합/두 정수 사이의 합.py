@@ -1,10 +1,20 @@
 def solution(a, b):
-    answer = 0
-    if a <= b:
-        for i in range(a, b+1):
-            answer += i
+    '''
+    내가 푼 풀이
     
-    else:
-        for i in range(b, a + 1):
-            answer += i
+    answer = 0
+    hi = max(a, b)
+    lo = min(a, b)
+    
+    for i in range(lo, hi + 1):
+        answer += i
+        
     return answer
+    
+    '''
+    
+    if a > b:
+        a , b = b, a
+    if a == b:
+        return a
+    return sum(range(a, b + 1))
