@@ -1,10 +1,8 @@
 def solution(n):
-    num = str(n)
-    reverse = num[::-1]
-    li = list(reverse)
-    answer = []
+    li = list(str(n))
+    li.reverse()
     
-    for i in li:
-        answer.append(int(i))
+    for i in range(len(li)):
+        li[i] = int(li[i])
     
-    return answer
+    return li
