@@ -14,7 +14,7 @@ def solution(nums):
                 tmp += 1
                 break
         
-        if tmp == 0:
+        else:
             cnt += 1
 
     return cnt
