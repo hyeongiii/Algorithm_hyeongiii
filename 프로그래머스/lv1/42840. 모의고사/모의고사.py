@@ -1,3 +1,6 @@
+'''
+# 나의 풀이
+
 def solution(answers):
     answer = []
     s1 = [1, 2, 3, 4, 5]
@@ -30,5 +33,28 @@ def solution(answers):
         answer.append(2)
     if m == cnt3:
         answer.append(3)
+    
+    return answer
+'''
+
+def solution(answers):
+    answer = []
+    s1 = [1, 2, 3, 4, 5]
+    s2 = [2, 1, 2, 3, 2, 4, 2, 5]
+    s3 = [3, 3, 1, 1, 2, 2, 4, 4, 5, 5]
+    cnt = [0, 0, 0]
+    
+    # enumerate() : 인덱스(index)와 원소를 동시에 접근하면서 루프를 돌릴 수 있음
+    for idx, ans in enumerate(answers):
+        if ans == s1[idx % len(s1)]:
+            cnt[0] += 1
+        if ans == s2[idx % len(s2)]:
+            cnt[1] += 1
+        if ans == s3[idx % len(s3)]:
+            cnt[2] += 1
+    
+    for idx, val in enumerate(cnt):
+        if val == max(cnt):
+            answer.append(idx + 1)
     
     return answer
