@@ -4,8 +4,7 @@ def solution(s):
     for i in range(1, len(s)):
         if s[i - 1] == " " and s[i] != " ":
             answer += s[i].upper()
-        elif s[i - 1] == " " and s[i] == " ":
-            answer += " "
+
         else:
             answer += s[i].lower()
             
