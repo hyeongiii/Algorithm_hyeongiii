@@ -9,4 +9,5 @@ WHERE R.MEMBER_ID IN (SELECT MEMBER_ID
                                                  GROUP BY MEMBER_ID
                                                  ORDER BY NUM DESC
                                                  LIMIT 1))
+                                                 # MAX(COUNT(*)) 를 사용할 수 없는 이유 : 리뷰를 가장 많이 작성한 회원이 여러명일 때, 에러가 발생한다.
 ORDER BY R.REVIEW_DATE, R.REVIEW_TEXT
