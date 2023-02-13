@@ -1,33 +1,35 @@
-import java.io.*;
 import java.util.*;
+import java.io.*;
 
 public class Main {
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        char[][] data = new char[5][15];
-        int max = 0;
-        
-        for (int i = 0; i < 5; i++) {
-            String str = br.readLine();
-            if (max < str.length()) {
-                max = str.length();
-            }
-            // char를 2차원 배열에 저장
-            for (int j = 0; j < str.length(); j++) {
-                data[i][j] = str.charAt(j);
-            }
-        }
-        
         StringBuilder sb = new StringBuilder();
         
-        for (int i = 0; i < max; i++) {
-            for (int j = 0; j < 5; j++) {
-                // char 배열의 초기값: '\0'
-                if(data[j][i] == '\0') continue;
-                sb.append(data[j][i]);
+        char[][] ch = new char[5][15];
+        int max = -1;
+
+        for (int i = 0; i < 5; i++) {
+            String tmp = br.readLine();
+
+            if (max < tmp.length()) {
+                max = tmp.length();
+            }
+
+            for (int j = 0; j < tmp.length(); j++) {
+                ch[i][j] = tmp.charAt(j);
             }
         }
-        
+
+        for (int i = 0; i < max; i++) {
+            for (int j = 0; j < 5; j++) {
+                if (ch[j][i] == '\0') {
+                    continue;
+                }
+                sb.append(ch[j][i]);
+            }
+        }
+
         System.out.println(sb);
     }
 }
