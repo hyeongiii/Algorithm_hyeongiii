@@ -1,44 +1,83 @@
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.util.StringTokenizer;
-import java.io.IOException;
- 
+import java.util.*;
+import java.io.*;
+
 public class Main {
- 
-	public static int[] arr;
-	public static int N, M;
-	public static StringBuilder sb = new StringBuilder();
- 
-	public static void main(String[] args) throws IOException {
- 
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StringTokenizer st = new StringTokenizer(br.readLine());
- 
-		N = Integer.parseInt(st.nextToken());
-		M = Integer.parseInt(st.nextToken());
- 
-		arr = new int[M];
+    static StringBuilder sb = new StringBuilder();
+    
+    static int N, M;
+    static int[] selected;
+    static int[] isUsed;
+    
+    static void input() {
+        FastReader scan = new FastReader();
+        N = scan.nextInt();
+        M = scan.nextInt();
+        selected = new int[M + 1];
+    }
+    
+    static void rec_func(int k) {
+        if (k == M + 1) {
+            for (int i = 1; i <= M; i++) sb.append(selected[i]).append(" ");
+            sb.append('\n');
+        } else {
+            for (int cand = selected[k - 1] + 1; cand <= N; cand++) {
+                selected[k] = cand;
+                rec_func(k + 1);
+                selected[k] = 0;
+            }
+        }
+    }
+    
+    public static void main(String[] args) {
+        input();
         
-		dfs(1, 0);
-		System.out.println(sb);
- 
-	}
- 
-	public static void dfs(int at, int depth) {
- 
-		if (depth == M) {
-			for (int val : arr) {
-				sb.append(val).append(' ');
-			}
-			sb.append('\n');
-			return;
-		}
+        rec_func(1);
+        System.out.println(sb.toString());
+    }
+    
+    static class FastReader {
+        BufferedReader br;
+        StringTokenizer st;
         
-		for (int i = at; i <= N; i++) {
- 
-			arr[depth] = i;
-			dfs(i + 1, depth + 1);
- 
-		}
-	}
+        public FastReader() {
+            br = new BufferedReader(new InputStreamReader(System.in));
+        }
+        
+        public FastReader(String s) throws FileNotFoundException {
+            br = new BufferedReader(new FileReader(new File(s)));
+        }
+        
+        String next() {
+            while (st == null || !st.hasMoreElements()) {
+                try {
+                    st = new StringTokenizer(br.readLine());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            return st.nextToken();
+        }
+        
+        int nextInt() {
+            return Integer.parseInt(next());
+        }
+        
+        long nextLong() {
+            return Long.parseLong(next());
+        }
+        
+        double nextDouble() {
+            return Double.parseDouble(next());
+        }
+        
+        String nextLine() {
+            String str = "";
+            try {
+                str = br.readLine();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return str;
+        }
+    }
 }
