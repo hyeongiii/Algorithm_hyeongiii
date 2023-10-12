@@ -1,57 +1,89 @@
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.util.StringTokenizer;
+import java.io.*;
+import java.util.*;
 
 public class Main {
+    static FastReader scan = new FastReader();
+    static StringBuilder sb;
 
-	public static void main(String[] args) throws Exception {
-		// TODO Auto-generated method stub
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		
-		StringTokenizer st = new StringTokenizer(br.readLine());
-		int row = Integer.parseInt(st.nextToken());
-		int column = Integer.parseInt(st.nextToken());
-		
-		
-		// 성 정보를 배열로 생성
-		boolean[][] arr = new boolean[row][column];
-		String[] temp = new String[column];
-		for (int i=0; i<row; i++) {
-			temp = br.readLine().split("");
-			
-			for (int j=0; j<column; j++) {
-				if (temp[j].equals("X")) arr[i][j] = true;
-			}
-		}
-		
-		int notRowGuard = 0; // 가드가 없는 row의 수
-		int notColumnGuard = 0; // 가드가 없는 column의 수
-		boolean hasGuard;
-		// Guard가 없는 Row 체크
-		for (int i=0; i< row; i++) {
-			hasGuard = false;
-			for (int j=0; j<column; j++) {
-				if (arr[i][j]) { // 가드가 해당 라인에 존재하면 해당 줄은 탐색 종료
-					hasGuard = true;
-					break;
-				}
-			}
-			if (!hasGuard) notRowGuard++;
-		}
-		
-		// Guard가 없는 Column 체크
-		for (int i=0; i< column; i++) {
-			hasGuard = false;
-			for (int j=0; j<row; j++) {
-				if (arr[j][i]) { // 가드가 해당 라인에 존재하면 해당 줄은 탐색 종료
-					hasGuard = true;
-					break;
-				}
-			}
-			if (!hasGuard) notColumnGuard++;
-		}
-		
-		// guard가 없는 line이 더 많은 값 출력
-		System.out.println(notRowGuard>notColumnGuard ? notRowGuard:notColumnGuard);
-	}
+    static int n, m;
+    static boolean[][] castle;
+
+    public static void input() {
+        n = scan.nextInt();
+        m = scan.nextInt();
+        castle = new boolean[n][m];
+
+        for (int i = 0; i < n; i++) {
+            String temp = scan.next();
+            for (int j = 0; j < m; j++) {
+                if (temp.charAt(j) == 'X') {
+                    castle[i][j] = true;
+                } else {
+                    castle[i][j] = false;
+                }
+            }
+        }
+    }
+
+    public static int calculate(boolean[][] castle) {
+        int rowCount = 0;
+        int colCount = 0;
+
+        for (int i = 0; i < n; i++) {
+            boolean hasGuard = false;
+            for (int j = 0; j < m; j++) {
+                if (castle[i][j]) {
+                    hasGuard = true;
+                    break;
+                }
+            }
+            if (!hasGuard) {
+                rowCount++;
+            }
+        }
+
+        for (int j = 0; j < m; j++) {
+            boolean hasGuard = false;
+            for (int i = 0; i < n; i++) {
+                if (castle[i][j]) {
+                    hasGuard = true;
+                    break;
+                }
+            }
+            if (!hasGuard) {
+                colCount++;
+            }
+        }
+
+        return Math.max(rowCount, colCount);
+    }
+
+    public static void main(String[] args) {
+        input();
+        System.out.println(calculate(castle));
+    }
+
+    static class FastReader {
+        BufferedReader br;
+        StringTokenizer st;
+
+        public FastReader() {
+            br = new BufferedReader(new InputStreamReader(System.in));
+        }
+
+        public String next() {
+            while (st == null || !st.hasMoreElements()) {
+                try {
+                    st = new StringTokenizer(br.readLine());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            return st.nextToken();
+        }
+
+        public int nextInt() {
+            return Integer.parseInt(next());
+        }
+    }
 }
